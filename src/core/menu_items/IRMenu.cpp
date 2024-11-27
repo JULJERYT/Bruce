@@ -6,11 +6,11 @@
 
 void IRMenu::optionsMenu() {
     options = {
-        {"TV-B-Gone", [=]() { StartTvBGone(); }},
+        {"wylacz tv", [=]() { StartTvBGone(); }},
         {"Custom IR", [=]() { otherIRcodes(); }},
         {"IR Read",   [=]() { IrRead(); }},
         {"Config",    [=]() { configMenu(); }},
-        {"Main Menu", [=]() { backToMenu(); }}
+        {"wroc do menu", [=]() { backToMenu(); }}
     };
 
     delay(200);

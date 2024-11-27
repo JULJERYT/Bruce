@@ -59,8 +59,8 @@ std::vector<Option> getScriptsOptionsList() {
 void ScriptsMenu::optionsMenu() {
     options = getScriptsOptionsList();
 
-    options.push_back({"Load...",   [=]() { run_bjs_script(); }});
-    options.push_back({"Main Menu", [=]() { backToMenu();     }});
+    options.push_back({"zaladuj",   [=]() { run_bjs_script(); }});
+    options.push_back({"wroc do menu", [=]() { backToMenu();     }});
 
     delay(200);
     loopOptions(options,false,true,"Scripts");

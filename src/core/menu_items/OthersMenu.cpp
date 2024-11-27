@@ -16,16 +16,16 @@
 
 void OthersMenu::optionsMenu() {
     options = {
-        {"SD Card",      [=]() { loopSD(SD); }},
-        {"LittleFS",     [=]() { loopSD(LittleFS); }},
-        {"WebUI",        [=]() { loopOptionsWebUi(); }},
-        {"QRCodes",      [=]() { qrcode_menu(); }},
-        {"GPS Tracker",  [=]() { GPSTracker(); }},
-        {"Megalodon",    [=]() { shark_setup(); }},
+        {"sd card",      [=]() { loopSD(SD); }},
+        {"littlefs",     [=]() { loopSD(LittleFS); }},
+        {"webui",        [=]() { loopOptionsWebUi(); }},
+        {"kody qr",      [=]() { qrcode_menu(); }},
+        {"tracker gps",  [=]() { GPSTracker(); }},
+        {"gierka",    [=]() { shark_setup(); }},
     #ifdef MIC_SPM1423
-        {"Mic Spectrum", [=]() { mic_test(); }},
+        {"mic spectrum", [=]() { mic_test(); }},
     #endif
-        {"BadUSB",       [=]()  { usb_setup(); }},
+        {"bad usb",       [=]()  { usb_setup(); }},
     #ifdef HAS_KEYBOARD_HID
         {"USB Keyboard", [=]()  { usb_keyboard(); }},
     #endif
@@ -34,12 +34,12 @@ void OthersMenu::optionsMenu() {
         {"LED FLash",    [=]()  { ledrgb_flash(); }},  // IncursioHack
     #endif
     #ifndef LITE_VERSION
-        {"Openhaystack", [=]()  { openhaystack_setup(); }},
+        {"fake airtag", [=]()  { openhaystack_setup(); }},
     #endif
     #if !defined(CORE) && !defined(CORE2)
-        {"Interpreter", [=]()   { run_bjs_script(); }},
+        {"interpreter", [=]()   { run_bjs_script(); }},
     #endif
-        {"Main Menu",    [=]()  { backToMenu(); }},
+        {"wroc do menu",    [=]()  { backToMenu(); }},
     };
 
     delay(200);

@@ -18,26 +18,26 @@
 void WifiMenu::optionsMenu() {
     if(!wifiConnected) {
         options = {
-            {"Connect Wifi", [=]()  { wifiConnectMenu(WIFI_STA); }},  
-            {"WiFi AP",      [=]()  { wifiConnectMenu(WIFI_AP); displayInfo("pwd: " + bruceConfig.wifiAp.pwd, true); }},
+            {"polacz z wifi", [=]()  { wifiConnectMenu(WIFI_STA); }},  
+            {"utworz ap",      [=]()  { wifiConnectMenu(WIFI_AP); displayInfo("pwd: " + bruceConfig.wifiAp.pwd, true); }},
         };
     } else {
-        options = {{"Disconnect",   [=]()  { wifiDisconnect(); }} };
-        if(WiFi.getMode() == WIFI_MODE_STA) options.push_back({"AP info",   [=]()  { displayAPInfo(); }});
+        options = {{"rozlacz z wifi",   [=]()  { wifiDisconnect(); }} };
+        if(WiFi.getMode() == WIFI_MODE_STA) options.push_back({"info o ap",   [=]()  { displayAPInfo(); }});
     }
-    options.push_back({"Wifi Atks", [=]()     { wifi_atk_menu(); }});
-    options.push_back({"Evil Portal", [=]()   { EvilPortal(); }});
-    options.push_back({"Wardriving", [=]()    { Wardriving(); }});
+    options.push_back({"ataki na wifi", [=]()     { wifi_atk_menu(); }});
+    options.push_back({"wifi portal", [=]()   { EvilPortal(); }});
+    options.push_back({"wardriving", [=]()    { Wardriving(); }});
 #ifndef LITE_VERSION
-    options.push_back({"TelNET", [=]()        { telnet_setup(); }});
-    options.push_back({"SSH", [=]()           { ssh_setup(); }});
-    options.push_back({"DPWO", [=]()          { dpwo_setup(); }});
-    options.push_back({"Raw Sniffer", [=]()   { sniffer_setup(); }});
-    options.push_back({"Scan Hosts", [=]()    { local_scan_setup(); }});
-    options.push_back({"Wireguard", [=]()     { wg_setup(); }});
-    options.push_back({"Brucegotchi",  [=]()   { brucegotchi_start(); }});
+    options.push_back({"telnet", [=]()        { telnet_setup(); }});
+    options.push_back({"ssh", [=]()           { ssh_setup(); }});
+    options.push_back({"dpwo", [=]()          { dpwo_setup(); }});
+    options.push_back({"raw sniffer", [=]()   { sniffer_setup(); }});
+    options.push_back({"skanuj hosty", [=]()    { local_scan_setup(); }});
+    options.push_back({"wireguard", [=]()     { wg_setup(); }});
+    options.push_back({"nygusgotchi",  [=]()   { brucegotchi_start(); }});
 #endif
-    options.push_back({"Main Menu", [=]()     { backToMenu(); }});
+    options.push_back({"wroc do menu", [=]()     { backToMenu(); }});
 
     delay(200);
     loopOptions(options,false,true,"WiFi");

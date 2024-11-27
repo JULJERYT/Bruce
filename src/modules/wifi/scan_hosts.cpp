@@ -84,7 +84,7 @@ void local_scan_setup() {
           if( host.ip == gateway ) result += "(GATE)";
           options.push_back({result.c_str(), [=](){ afterScanOptions(host); }});
         }
-        options.push_back({"Main Menu", [=]() { backToMenu(); }});
+        options.push_back({"wroc do menu", [=]() { backToMenu(); }});
 
         delay(200);
         loopOptions(options);

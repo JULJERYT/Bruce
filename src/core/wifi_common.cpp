@@ -10,7 +10,7 @@ bool _wifiConnect(const String& ssid, int encryption)
 {
   String password = bruceConfig.getWifiPassword(ssid);
   if (password == "" && encryption > 0) {
-    password = keyboard(password, 63, "Network Password:");
+    password = keyboard(password, 63, "haslo do wifi:");
   }
   bool connected = _connectToWifiNetwork(ssid, password);
   bool retry = false;;
@@ -19,8 +19,8 @@ bool _wifiConnect(const String& ssid, int encryption)
     wakeUpScreen();
 
     options = {
-      {"Retry",  [&]() { retry = true;  }},
-      {"Cancel", [&]() { retry = false; }},
+      {"sprobuj ponownie",  [&]() { retry = true;  }},
+      {"anuluj", [&]() { retry = false; }},
     };
     loopOptions(options);
     delay(200);
@@ -30,7 +30,7 @@ bool _wifiConnect(const String& ssid, int encryption)
       return false;
     }
 
-    password = keyboard(password, 63, "Network Password:");
+    password = keyboard(password, 63, "haslo do wifi:");
     connected = _connectToWifiNetwork(ssid, password);
   }
 
@@ -46,9 +46,9 @@ bool _wifiConnect(const String& ssid, int encryption)
 }
 
 bool _connectToWifiNetwork(const String& ssid, const String& pwd) {
-  drawMainBorderWithTitle("WiFi Connect");
+  drawMainBorderWithTitle("laczenie z wifi");
   padprintln("");
-  padprint("Connecting to: " + ssid + ".");
+  padprint("laczenie do: " + ssid + ".");
 
   WiFi.begin(ssid, pwd);
 
@@ -61,7 +61,7 @@ bool _connectToWifiNetwork(const String& ssid, const String& pwd) {
     tft.print(".");
 
     if (i > 20) {
-      displayError("Wifi Offline");
+      displayError("wifi nieaktywne");
       delay(500);
       break;
     }
@@ -107,7 +107,7 @@ bool wifiConnectMenu(wifi_mode_t mode)
   case WIFI_STA: // station mode
     int nets;
     WiFi.mode(WIFI_MODE_STA);
-    displayRedStripe("Scanning..", TFT_WHITE, bruceConfig.priColor);
+    displayRedStripe("skanowanie...", TFT_WHITE, bruceConfig.priColor);
     nets = WiFi.scanNetworks();
     options = {};
     for (int i = 0; i < nets; i++) {
@@ -115,7 +115,7 @@ bool wifiConnectMenu(wifi_mode_t mode)
         WiFi.SSID(i).c_str(), [=]() { _wifiConnect(WiFi.SSID(i), int(WiFi.encryptionType(i))); }
       );
     }
-    options.emplace_back( "Main Menu", [=](){ backToMenu(); });
+    options.emplace_back( "wroc do menu", [=](){ backToMenu(); });
     delay(200);
     loopOptions(options);
     delay(200);
@@ -126,7 +126,7 @@ bool wifiConnectMenu(wifi_mode_t mode)
   break;
 
   default: // error handling
-    Serial.println("Unknown wifi mode: " + String(mode));
+    Serial.println("nieznany tryb wifi: " + String(mode));
   break;
   }
 

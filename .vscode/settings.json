@@ -61,5 +61,6 @@
     },
     "githubPullRequests.ignoredPullRequestBranches": [
         "main"
-    ]
+    ],
+    "cmake.sourceDirectory": "/home/jujer/Documents/GitHub/Bruce/.pio/libdeps/lilygo-t-deck/Adafruit BusIO"
 }

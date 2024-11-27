@@ -27,9 +27,9 @@ bool EvilPortal::setup() {
     bool returnToMain = false;
 
     options = {
-        {"Default",     [=]()  { loadDefaultHtml(); }},
-        {"Custom Html", [=]()  { loadCustomHtml();  }},
-        {"Main Menu",   [&]()  { returnToMain = true; }}
+        {"domyslny",     [=]()  { loadDefaultHtml(); }},
+        {"customowy", [=]()  { loadCustomHtml();  }},
+        {"wroc do menu",   [&]()  { returnToMain = true; }}
     };
     delay(200);
     loopOptions(options);

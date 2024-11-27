@@ -7,21 +7,21 @@ MainMenu::MainMenu() {
     _menuItems = {
         &wifiMenu,
         &bleMenu,
-        &rfMenu,
-        &rfidMenu,
-        &irMenu,
-        &fmMenu,
-    #if defined(USE_NRF24_VIA_SPI)
-        &nrf24Menu,
-    #endif
-    #if !defined(LITE_VERSION)
-        #if !defined(CORE) && !defined(CORE2)
-            &scriptsMenu,
-        #endif
-    #endif
+        // &rfMenu,
+        // &rfidMenu,
+        // &irMenu,
+        // &fmMenu,
+        // #if defined(USE_NRF24_VIA_SPI)
+        //     &nrf24Menu,
+        // #endif
+        // #if !defined(LITE_VERSION)
+        //     #if !defined(CORE) && !defined(CORE2)
+        //         &scriptsMenu,
+        //     #endif
+        // #endif
         &othersMenu,
         &clockMenu,
-        &connectMenu,
+        // &connectMenu,
         &configMenu,
     };
 

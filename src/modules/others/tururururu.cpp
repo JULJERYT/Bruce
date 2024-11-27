@@ -160,23 +160,15 @@ void shark_loop() {
         if(score>=50) { delay(15); }
 
         if(score==99) {
-            displaySuccess("So...");
+            displaySuccess("nosiema...");
             while(!checkSelPress()) { yield(); }
             while(checkSelPress()) { yield(); } //debounce
-            displaySuccess("you just found");
+            displaySuccess("wlasnie znalazles");
             while(!checkSelPress()) { yield(); }
             while(checkSelPress()) { yield(); } //debounce
-            displayInfo("hidden credits!");
+            displayInfo("ukryta wiadomosc!");
             while(!checkSelPress()) { yield(); }
             while(checkSelPress()) { yield(); } //debounce
-            displayInfo("main devs:");
-            while(!checkSelPress()) { yield(); }
-            while(checkSelPress()) { yield(); } //debounce
-            options = {
-                {"bmorcelli", [=]() { displayRedStripe("github.com/bmorcelli");delay(2000); }},
-                {"pr3y", [=]() { displayRedStripe("github.com/pr3y");delay(2000); }},
-                {"IncursioHack", [=]() { displayRedStripe("github.com/IncursioHack");delay(2000); }},
-            };
 
             delay(200);
             loopOptions(options);

@@ -37,7 +37,7 @@ void key_input_ble(FS fs, String bad_script) {
     File payloadFile = fs.open(bad_script, "r");
     if (payloadFile) {
       tft.setCursor(0, 40);
-      tft.println("from file!");
+      tft.println("z pliku!");
       String lineContent = "";
       String Command = "";
       char Cmd[15];
@@ -59,8 +59,8 @@ void key_input_ble(FS fs, String bad_script) {
         if(checkSelPress()) {
           while(checkSelPress()); // hold the code in this position until release the btn
           options = {
-            {"Continue",  [=](){ yield(); }},
-            {"Main Menu", [=](){ returnToMenu=true;}},
+            {"kontynuuj",  [=](){ yield(); }},
+            {"wroc do menu", [=](){ returnToMenu=true;}},
           };
           delay(250);
           loopOptions(options);
@@ -198,7 +198,7 @@ void key_input_ble(FS fs, String bad_script) {
       }
       tft.setTextSize(FM);
       payloadFile.close();
-      Serial.println("Finished badusb payload execution...");
+      Serial.println("zakonczono wykonywanie payloadu...");
     }
   } else {
     // rick
@@ -227,8 +227,11 @@ void chooseKb_ble(const uint8_t *layout) {
 }
 bool ask_restart() {
   if(Ask_for_restart==2) { // it'll be set to 2 if it was 1 and disconnect bluetooth
-    displayError("Restart Device");
-    returnToMenu=true;
+    displayError("wymagany restart");
+    delay(3);
+    displayWarning("restartowanie...");
+    delay(2);
+    ESP.restart();
     return true;
   }
   return false;
@@ -238,7 +241,7 @@ bool ask_restart() {
 void ble_setup() {
   if(ask_restart()) return;
   FS *fs;
-  Serial.println("BadBLE begin");
+  Serial.println("zaczynam badble");
   bool first_time=true;
   int index=0;
 NewScript:
@@ -249,10 +252,10 @@ NewScript:
   options = { };
 
   if(setupSdCard()) {
-    options.push_back({"SD Card", [&]()  { fs=&SD; }});
+    options.push_back({"karta sd", [&]()  { fs=&SD; }});
   }
-  options.push_back({"LittleFS",  [&]()   { fs=&LittleFS; }});
-  options.push_back({"Main Menu", [&]()   { fs=nullptr; }});
+  options.push_back({"littlefs",  [&]()   { fs=&LittleFS; }});
+  options.push_back({"wroc do menu", [&]()   { fs=nullptr; }});
 
   delay(250);
   loopOptions(options);
@@ -274,28 +277,28 @@ NewScript:
         {"sv-SE",       [=]() { chooseKb_ble(KeyboardLayout_sv_SE); }},
         {"da-DK",       [=]() { chooseKb_ble(KeyboardLayout_da_DK); }},
         {"hu-HU",       [=]() { chooseKb_ble(KeyboardLayout_hu_HU); }},
-        {"Main Menu",   [=]() { returnToMenu=true; }},
+        {"wroc do menu",   [=]() { returnToMenu=true; }},
       };
       delay(250);
-      index=loopOptions(options,false,true,"Keyboard Layout",index); // It will ask for the keyboard each time, but will save the last chosen to be faster
+      index=loopOptions(options,false,true,"uklad klawiatury",index); // It will ask for the keyboard each time, but will save the last chosen to be faster
       delay(250);
       if(returnToMenu) return;
       if (!kbChosen_ble) Kble.begin(); // starts the KeyboardLayout_en_US as default if nothing had beed chosen (cancel selection)
       Ask_for_restart=1; // arm the flag
       first_time=false;
-      displayRedStripe("Waiting Victim",TFT_WHITE, bruceConfig.priColor);
+      displayRedStripe("czekam na ofiare",TFT_WHITE, bruceConfig.priColor);
     }
     while (!Kble.isConnected() && !checkEscPress());
 
     if(Kble.isConnected())  {
       BLEConnected=true;
-      displayRedStripe("Preparing",TFT_WHITE, bruceConfig.priColor);
+      displayRedStripe("przygotowywanie",TFT_WHITE, bruceConfig.priColor);
       delay(1000);
-      displayWarning(String(BTN_ALIAS) + " to deploy", true);
+      displayWarning(String(BTN_ALIAS) + " aby zaczac", true);
       delay(200);
       key_input_ble(*fs, bad_script);
 
-      displayRedStripe("Payload Sent",TFT_WHITE, bruceConfig.priColor);
+      displayRedStripe("wyslano payload",TFT_WHITE, bruceConfig.priColor);
       checkSelPress();
       while (!checkSelPress()) {
           // nothing here, just to hold the screen press Ok of M5.
@@ -305,7 +308,7 @@ NewScript:
 
       goto NewScript;
     }
-    else displayWarning("Canceled", true);
+    else displayWarning("anulowano", true);
   }
 End:
 
@@ -320,7 +323,7 @@ void ble_MediaCommands() {
 
   if(!Kble.isConnected()) Kble.begin();
 
-  displayRedStripe("Pairing...",TFT_WHITE, bruceConfig.priColor);
+  displayRedStripe("parowanie...",TFT_WHITE, bruceConfig.priColor);
 
   while (!Kble.isConnected() && !checkEscPress());
 
@@ -331,16 +334,17 @@ void ble_MediaCommands() {
 
   reMenu:
     options={
-      {"ScreenShot",  [=](){ Kble.press(KEY_PRINT_SCREEN); Kble.releaseAll(); }},
-      {"Play/Pause",  [=](){ Kble.press(KEY_MEDIA_PLAY_PAUSE); Kble.releaseAll(); }},
-      {"Stop",        [=](){ Kble.press(KEY_MEDIA_STOP); Kble.releaseAll(); }},
-      {"Next Track",  [=](){ Kble.press(KEY_MEDIA_NEXT_TRACK); Kble.releaseAll(); }},
-      {"Prev Track",  [=](){ Kble.press(KEY_MEDIA_PREVIOUS_TRACK); Kble.releaseAll(); }},
-      {"Volume +",    [=](){ Kble.press(KEY_MEDIA_VOLUME_UP); Kble.releaseAll(); }},
-      {"Volume -",    [=](){ Kble.press(KEY_MEDIA_VOLUME_DOWN); Kble.releaseAll(); }},
-      {"Mute",        [=](){ Kble.press(KEY_MEDIA_MUTE); Kble.releaseAll(); }},
+      {"screenshot",  [=](){ Kble.press(KEY_PRINT_SCREEN); Kble.releaseAll(); }},
+      {"zrob zdjecie",    [=](){ Kble.press(KEY_MEDIA_VOLUME_UP); Kble.releaseAll(); }},
+      {"odtworz/pauza",  [=](){ Kble.press(KEY_MEDIA_PLAY_PAUSE); Kble.releaseAll(); }},
+      {"stop",        [=](){ Kble.press(KEY_MEDIA_STOP); Kble.releaseAll(); }},
+      {"nast. utwor",  [=](){ Kble.press(KEY_MEDIA_NEXT_TRACK); Kble.releaseAll(); }},
+      {"wcz. utwor.",  [=](){ Kble.press(KEY_MEDIA_PREVIOUS_TRACK); Kble.releaseAll(); }},
+      {"glosnosc +",    [=](){ Kble.press(KEY_MEDIA_VOLUME_UP); Kble.releaseAll(); }},
+      {"glosnosc -",    [=](){ Kble.press(KEY_MEDIA_VOLUME_DOWN); Kble.releaseAll(); }},
+      {"wycisz",        [=](){ Kble.press(KEY_MEDIA_MUTE); Kble.releaseAll(); }},
       //{"", [=](){ Kble.press(); Kble.releaseAll(); }},
-      {"Main Menu", [=](){ returnToMenu=true;}},
+      {"wroc do menu", [=](){ returnToMenu=true;}},
     };
     delay(250);
     index=loopOptions(options,index);

@@ -6,24 +6,24 @@
 
 void ConfigMenu::optionsMenu() {
     options = {
-        {"Brightness",    [=]() { setBrightnessMenu(); }},
-        {"Dim Time",      [=]() { setDimmerTimeMenu(); }},
-        {"Orientation",   [=]() { gsetRotation(true); }},
-        {"UI Color",      [=]() { setUIColor(); }},
-        {"Sound On/Off",  [=]() { setSoundConfig(); }},
-        {"Startup WiFi",  [=]() { setWifiStartupConfig(); }},
-        {"Startup App",   [=]() { setStartupApp(); }},
-        {"Clock",         [=]() { setClock(); }},
-        {"Sleep",         [=]() { setSleepMode(); }},
-        {"Restart",       [=]() { ESP.restart(); }},
+        {"jasnosc",    [=]() { setBrightnessMenu(); }},
+        {"wygaszanie",      [=]() { setDimmerTimeMenu(); }},
+        {"orientacja",   [=]() { gsetRotation(true); }},
+        {"kolor ui",      [=]() { setUIColor(); }},
+        {"dzwiek",  [=]() { setSoundConfig(); }},
+        {"startup wifi",  [=]() { setWifiStartupConfig(); }},
+        {"startup app",   [=]() { setStartupApp(); }},
+        {"zegar",         [=]() { setClock(); }},
+        {"uspij",         [=]() { setSleepMode(); }},
+        {"restartuj",       [=]() { ESP.restart(); }},
     };
 
   #if defined(T_EMBED_1101)
-    options.push_back({"Turn-off",  [=]() { digitalWrite(PIN_POWER_ON,LOW); esp_sleep_enable_ext0_wakeup(GPIO_NUM_6,LOW); esp_deep_sleep_start(); }});
+    options.push_back({"wylacz",  [=]() { digitalWrite(PIN_POWER_ON,LOW); esp_sleep_enable_ext0_wakeup(GPIO_NUM_6,LOW); esp_deep_sleep_start(); }});
   #endif
-    if (bruceConfig.devMode) options.push_back({"Dev Mode", [=]() { devMenu(); }});
+    if (bruceConfig.devMode) options.push_back({"dev mode", [=]() { devMenu(); }});
 
-    options.push_back({"Main Menu", [=]() { backToMenu(); }});
+    options.push_back({"wroc do menu", [=]() { backToMenu(); }});
 
     delay(200);
     loopOptions(options,false,true,"Config");
@@ -31,13 +31,13 @@ void ConfigMenu::optionsMenu() {
 
 void ConfigMenu::devMenu(){
     options = {
-        {"MAC Address",   [=]() { checkMAC(); }},
-        {"I2C Finder",    [=]() { find_i2c_addresses(); }},
-        {"Back",          [=]() { optionsMenu(); }},
+        {"adres mac",   [=]() { checkMAC(); }},
+        {"I2C finder",    [=]() { find_i2c_addresses(); }},
+        {"wroc",          [=]() { optionsMenu(); }},
     };
 
     delay(200);
-    loopOptions(options,false,true,"Dev Mode");
+    loopOptions(options,false,true,"dev mode");
 }
 
 String ConfigMenu::getName() {

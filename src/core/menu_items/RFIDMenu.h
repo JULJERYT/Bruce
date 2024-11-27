@@ -11,7 +11,7 @@ public:
     String getName(void);
 
 private:
-    String _name = "RFID";
+    String _name = "rfid";
 
     void configMenu(void);
 };

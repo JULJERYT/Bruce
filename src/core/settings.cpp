@@ -87,7 +87,7 @@ void setBrightnessMenu() {
     {"50 %", [=]() { setBrightness(50);  }, bruceConfig.bright == 50 },
     {"25 %", [=]() { setBrightness(25);  }, bruceConfig.bright == 25 },
     {" 1 %", [=]() { setBrightness(1);   }, bruceConfig.bright == 1 },
-    {"Main Menu", [=]() { backToMenu(); }},
+    {"wroc do menu", [=]() { backToMenu(); }},
   };
   delay(200);
   loopOptions(options, true,false,"",idx);
@@ -126,7 +126,7 @@ void setDimmerTimeMenu() {
     {"20s", [=]() { bruceConfig.setDimmer(20); }, bruceConfig.dimmerSet == 20 },
     {"30s", [=]() { bruceConfig.setDimmer(30); }, bruceConfig.dimmerSet == 30 },
     {"60s", [=]() { bruceConfig.setDimmer(60); }, bruceConfig.dimmerSet == 60 },
-    {"Disabled", [=]() { bruceConfig.setDimmer(0); }, bruceConfig.dimmerSet == 0 },
+    {"wylaczony", [=]() { bruceConfig.setDimmer(0); }, bruceConfig.dimmerSet == 0 },
   };
   delay(200);
   loopOptions(options,idx);
@@ -152,19 +152,19 @@ void setUIColor(){
   else idx=9;  // custom theme
 
   options = {
-    {"Default",   [=]() { bruceConfig.setTheme(DEFAULT_PRICOLOR);}, bruceConfig.priColor==DEFAULT_PRICOLOR},
-    {"White",     [=]() { bruceConfig.setTheme(TFT_WHITE);     }, bruceConfig.priColor==TFT_WHITE     },
-    {"Red",       [=]() { bruceConfig.setTheme(TFT_RED);       }, bruceConfig.priColor==TFT_RED       },
-    {"Green",     [=]() { bruceConfig.setTheme(TFT_DARKGREEN); }, bruceConfig.priColor==TFT_DARKGREEN },
-    {"Blue",      [=]() { bruceConfig.setTheme(TFT_BLUE);      }, bruceConfig.priColor==TFT_BLUE      },
-    {"Light Blue",[=]() { bruceConfig.setTheme(LIGHT_BLUE);    }, bruceConfig.priColor==LIGHT_BLUE    },
-    {"Yellow",    [=]() { bruceConfig.setTheme(TFT_YELLOW);    }, bruceConfig.priColor==TFT_YELLOW    },
-    {"Magenta",   [=]() { bruceConfig.setTheme(TFT_MAGENTA);   }, bruceConfig.priColor==TFT_MAGENTA   },
-    {"Orange",    [=]() { bruceConfig.setTheme(TFT_ORANGE);    }, bruceConfig.priColor==TFT_ORANGE    },
+    {"domyslny",   [=]() { bruceConfig.setTheme(DEFAULT_PRICOLOR);}, bruceConfig.priColor==DEFAULT_PRICOLOR},
+    {"bialy",     [=]() { bruceConfig.setTheme(TFT_WHITE);     }, bruceConfig.priColor==TFT_WHITE     },
+    {"czerwony",       [=]() { bruceConfig.setTheme(TFT_RED);       }, bruceConfig.priColor==TFT_RED       },
+    {"zielony",     [=]() { bruceConfig.setTheme(TFT_DARKGREEN); }, bruceConfig.priColor==TFT_DARKGREEN },
+    {"niebieski",      [=]() { bruceConfig.setTheme(TFT_BLUE);      }, bruceConfig.priColor==TFT_BLUE      },
+    {"morski",[=]() { bruceConfig.setTheme(LIGHT_BLUE);    }, bruceConfig.priColor==LIGHT_BLUE    },
+    {"zolty",    [=]() { bruceConfig.setTheme(TFT_YELLOW);    }, bruceConfig.priColor==TFT_YELLOW    },
+    {"rozowy",   [=]() { bruceConfig.setTheme(TFT_MAGENTA);   }, bruceConfig.priColor==TFT_MAGENTA   },
+    {"pomaranczowy",    [=]() { bruceConfig.setTheme(TFT_ORANGE);    }, bruceConfig.priColor==TFT_ORANGE    },
   };
 
   if (idx == 9) options.push_back({"Custom Theme", [=]() { backToMenu(); }, true});
-  options.push_back({"Main Menu", [=]() { backToMenu(); }});
+  options.push_back({"wroc do menu", [=]() { backToMenu(); }});
 
   delay(200);
   loopOptions(options, idx);
@@ -177,8 +177,8 @@ void setUIColor(){
 **********************************************************************/
 void setSoundConfig() {
   options = {
-    {"Sound off", [=]() { bruceConfig.setSoundEnabled(0); }, bruceConfig.soundEnabled == 0},
-    {"Sound on",  [=]() { bruceConfig.setSoundEnabled(1); }, bruceConfig.soundEnabled == 1},
+    {"dzwiek wyl.", [=]() { bruceConfig.setSoundEnabled(0); }, bruceConfig.soundEnabled == 0},
+    {"dzwiek wl.",  [=]() { bruceConfig.setSoundEnabled(1); }, bruceConfig.soundEnabled == 1},
   };
   delay(200);
   loopOptions(options, bruceConfig.soundEnabled);
@@ -191,8 +191,8 @@ void setSoundConfig() {
 **********************************************************************/
 void setWifiStartupConfig() {
   options = {
-    {"Disable", [=]() { bruceConfig.setWifiAtStartup(0); }, bruceConfig.wifiAtStartup == 0},
-    {"Enable",  [=]() { bruceConfig.setWifiAtStartup(1); }, bruceConfig.wifiAtStartup == 1},
+    {"wylacz", [=]() { bruceConfig.setWifiAtStartup(0); }, bruceConfig.wifiAtStartup == 0},
+    {"wlacz",  [=]() { bruceConfig.setWifiAtStartup(1); }, bruceConfig.wifiAtStartup == 1},
   };
   delay(200);
   loopOptions(options, bruceConfig.wifiAtStartup);
@@ -300,9 +300,9 @@ void setClock() {
   #endif
 
   options = {
-    {"NTP Timezone", [&]() { auto_mode=true; }},
-    {"Manually set", [&]() { auto_mode=false; }},
-    {"Main Menu",    [=]() { backToMenu(); }},
+    {"ustaw z neta", [&]() { auto_mode=true; }},
+    {"ustaw recznie", [&]() { auto_mode=false; }},
+    {"wroc do menu",    [=]() { backToMenu(); }},
   };
   delay(200);
   loopOptions(options);
@@ -314,19 +314,19 @@ void setClock() {
     if(!wifiConnected) wifiConnectMenu();
 
     options = {
-      {"Brasilia",    [&]() { bruceConfig.setTmz(-3); }, bruceConfig.tmz==-3 },
-      {"Pernambuco",  [&]() { bruceConfig.setTmz(-2); }, bruceConfig.tmz==-2 },
-      {"Los Angeles", [&]() { bruceConfig.setTmz(-8); }, bruceConfig.tmz==-8 },
-      {"New York",    [&]() { bruceConfig.setTmz(-5); }, bruceConfig.tmz==-5 },
-      {"Lisbon",      [&]() { bruceConfig.setTmz(0);  }, bruceConfig.tmz==0  },
-      {"Paris",       [&]() { bruceConfig.setTmz(1);  }, bruceConfig.tmz==1  },
-      {"Athens",      [&]() { bruceConfig.setTmz(2);  }, bruceConfig.tmz==2  },
-      {"Moscow",      [&]() { bruceConfig.setTmz(3);  }, bruceConfig.tmz==3  },
-      {"Dubai",       [&]() { bruceConfig.setTmz(4);  }, bruceConfig.tmz==4  },
-      {"Hong Kong",   [&]() { bruceConfig.setTmz(8);  }, bruceConfig.tmz==8  },
-      {"Tokyo",       [&]() { bruceConfig.setTmz(9);  }, bruceConfig.tmz==9  },
-      {"Sydney",      [&]() { bruceConfig.setTmz(10); }, bruceConfig.tmz==10 },
-      {"Main Menu",   [=]() { backToMenu(); }},
+      {"brazylia",    [&]() { bruceConfig.setTmz(-3); }, bruceConfig.tmz==-3 },
+      {"pernambuco",  [&]() { bruceConfig.setTmz(-2); }, bruceConfig.tmz==-2 },
+      {"los angeles", [&]() { bruceConfig.setTmz(-8); }, bruceConfig.tmz==-8 },
+      {"nowy jork",    [&]() { bruceConfig.setTmz(-5); }, bruceConfig.tmz==-5 },
+      {"lizbona",      [&]() { bruceConfig.setTmz(0);  }, bruceConfig.tmz==0  },
+      {"paryz",       [&]() { bruceConfig.setTmz(1);  }, bruceConfig.tmz==1  },
+      {"ateny",      [&]() { bruceConfig.setTmz(2);  }, bruceConfig.tmz==2  },
+      {"moskwa",      [&]() { bruceConfig.setTmz(3);  }, bruceConfig.tmz==3  },
+      {"dubaj",       [&]() { bruceConfig.setTmz(4);  }, bruceConfig.tmz==4  },
+      {"hong kong",   [&]() { bruceConfig.setTmz(8);  }, bruceConfig.tmz==8  },
+      {"tokjo",       [&]() { bruceConfig.setTmz(9);  }, bruceConfig.tmz==9  },
+      {"sydnej",      [&]() { bruceConfig.setTmz(10); }, bruceConfig.tmz==10 },
+      {"wroc do menu",   [=]() { backToMenu(); }},
     };
 
     delay(200);
@@ -359,17 +359,17 @@ void setClock() {
     for(int i=0; i<12;i++) options.push_back({String(String(i<10?"0":"") + String(i)).c_str(), [&]() { delay(1); }});
 
     delay(200);
-    hr=loopOptions(options,false,true,"Set Hour");
+    hr=loopOptions(options,false,true,"ustaw godz");
     delay(200);
     options = { };
     for(int i=0; i<60;i++) options.push_back({String(String(i<10?"0":"") + String(i)).c_str(), [&]() { delay(1); }});
 
     delay(200);
-    mn=loopOptions(options,false,true,"Set Minute");
+    mn=loopOptions(options,false,true,"ustaw min");
     delay(200);
     options = {
-      {"AM", [&]() { am=0; }},
-      {"PM", [&]() { am=12; }},
+      {"am", [&]() { am=0; }},
+      {"pm", [&]() { am=12; }},
     };
     delay(200);
     loopOptions(options);
@@ -408,7 +408,7 @@ void runClockLoop() {
     #if !defined(HAS_RTC)
       updateTimeStr(rtc.getTimeStruct());
     #endif
-    Serial.print("Current time: ");
+    Serial.print("aktualny czas: ");
     Serial.println(timeStr);
     tft.setTextColor(bruceConfig.priColor, bruceConfig.bgColor);
     tft.drawRect(10, 10, WIDTH-15,HEIGHT-15, bruceConfig.priColor);
@@ -575,7 +575,7 @@ void setStartupApp() {
   if (bruceConfig.startupApp == "") idx=0;
 
   options = {
-    {"None", [=]() { bruceConfig.setStartupApp(""); }, bruceConfig.startupApp == "" }
+    {"brak", [=]() { bruceConfig.setStartupApp(""); }, bruceConfig.startupApp == "" }
   };
 
   int index = 1;

@@ -1177,7 +1177,7 @@ struct RfCodes selectRecentRfMenu() {
         // else
         options.push_back({ recent_rfcodes[i].filepath.c_str(), [i, &selected_code](){ selected_code = recent_rfcodes[i]; }});
     }
-    options.push_back({ "Main Menu" , [&](){ exit=true; }});
+    options.push_back({ "wroc do menu" , [&](){ exit=true; }});
     delay(200);
     loopOptions(options);
     return(selected_code);

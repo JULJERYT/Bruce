@@ -11,7 +11,7 @@ public:
     String getName(void);
 
 private:
-    String _name = "NRF24";
+    String _name = "nrf24";
 };
 
 #endif

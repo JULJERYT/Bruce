@@ -107,7 +107,7 @@ void ble_scan_setup()
 
 void ble_scan()
 {
-    displayRedStripe("Scanning..", TFT_WHITE, bruceConfig.priColor);
+    displayRedStripe("skanowanie...", TFT_WHITE, bruceConfig.priColor);
 
     options = { };
     ble_scan_setup();

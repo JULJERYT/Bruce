@@ -12,7 +12,7 @@ void FMMenu::optionsMenu() {
         {"FM Spectrum",   [=]() { fm_spectrum(); }},
         {"Hijack TA",     [=]() { fm_ta_run(); }},
     #endif
-        {"Main Menu",     [=]() { backToMenu(); }}
+        {"wroc do menu",     [=]() { backToMenu(); }}
     };
 
     delay(200);

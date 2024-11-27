@@ -11,7 +11,7 @@ public:
     String getName(void);
 
 private:
-    String _name = "WiFi";
+    String _name = "wajfaj";
 };
 
 #endif

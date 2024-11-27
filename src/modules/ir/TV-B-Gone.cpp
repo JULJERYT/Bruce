@@ -127,9 +127,9 @@ void StartTvBGone() {
 
   // determine region
   options = {
-      {"Region NA", [&]() { region = NA; }},
-      {"Region EU", [&]() { region = EU; }},
-      {"Main Menu", [=]() { backToMenu(); }},
+      {"region eu", [&]() { region = EU; }},
+      {"region na", [&]() { region = NA; }},
+      {"wroc do menu", [=]() { backToMenu(); }},
   };
   delay(300);
   loopOptions(options);
@@ -257,7 +257,7 @@ struct Codes selectRecentIrMenu() {
         // else
         options.push_back({ recent_ircodes[i].filepath.c_str(), [i, &selected_code](){ selected_code = recent_ircodes[i]; }});
     }
-    options.push_back({ "Main Menu" , [&](){ exit=true; }});
+    options.push_back({ "wroc do menu" , [&](){ exit=true; }});
     delay(200);
     loopOptions(options);
     return(selected_code);
@@ -521,7 +521,7 @@ void otherIRcodes() {
     //else if(codes[i].protocol=="Panasonic")   options.push_back({ codes[i].name.c_str(), [=](){ sendPanasonicCommand(codes[i].address, codes[i].command); addToRecentCodes(codes[i]); }});
     else if(codes[i].protocol!="" && codes[i].data!="")   options.push_back({ codes[i].name.c_str(), [=](){ sendDecodedCommand(codes[i].protocol, codes[i].data); addToRecentCodes(codes[i]); }});
   }
-  options.push_back({ "Main Menu" , [&](){ exit=true; }});
+  options.push_back({ "wroc do menu" , [&](){ exit=true; }});
   databaseFile.close();
 
   digitalWrite(bruceConfig.irTx, LED_OFF);

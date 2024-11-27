@@ -6,14 +6,14 @@
 #include "menu_items/BleMenu.h"
 #include "menu_items/ClockMenu.h"
 #include "menu_items/ConfigMenu.h"
-#include "menu_items/ConnectMenu.h"
-#include "menu_items/FMMenu.h"
-#include "menu_items/IRMenu.h"
-#include "menu_items/NRF24.h"
+// #include "menu_items/ConnectMenu.h"
+// #include "menu_items/FMMenu.h"
+// #include "menu_items/IRMenu.h"
+// #include "menu_items/NRF24.h"
 #include "menu_items/OthersMenu.h"
-#include "menu_items/RFIDMenu.h"
-#include "menu_items/RFMenu.h"
-#include "menu_items/ScriptsMenu.h"
+// #include "menu_items/RFIDMenu.h"
+// #include "menu_items/RFMenu.h"
+// #include "menu_items/ScriptsMenu.h"
 #include "menu_items/WifiMenu.h"
 
 
@@ -21,15 +21,15 @@ class MainMenu {
 public:
     BleMenu bleMenu;
     ClockMenu clockMenu;
-    ConnectMenu connectMenu;
+    // ConnectMenu connectMenu;
     ConfigMenu configMenu;
-    FMMenu fmMenu;
-    IRMenu irMenu;
-    NRF24Menu nrf24Menu;
+    // FMMenu fmMenu;
+    // IRMenu irMenu;
+    // NRF24Menu nrf24Menu;
     OthersMenu othersMenu;
-    RFIDMenu rfidMenu;
-    RFMenu rfMenu;
-    ScriptsMenu scriptsMenu;
+    // RFIDMenu rfidMenu;
+    // RFMenu rfMenu;
+    // ScriptsMenu scriptsMenu;
     WifiMenu wifiMenu;
 
     MainMenu();

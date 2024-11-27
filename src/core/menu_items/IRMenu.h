@@ -11,7 +11,7 @@ public:
     String getName(void);
 
 private:
-    String _name = "IR";
+    String _name = "ir";
 
     void configMenu(void);
 };

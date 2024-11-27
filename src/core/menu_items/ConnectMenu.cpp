@@ -8,9 +8,9 @@
 
 void ConnectMenu::optionsMenu() {
     options = {
-        {"Send File",    [=]() { DeviceConnection().sendFile(); }},
-        {"Receive File", [=]() { DeviceConnection().receiveFile(); }},
-        {"Main Menu",    [=]() { backToMenu(); }},
+        {"wyslij plik",    [=]() { DeviceConnection().sendFile(); }},
+        {"odbierz plik", [=]() { DeviceConnection().receiveFile(); }},
+        {"wroc do menu",    [=]() { backToMenu(); }},
     };
 
     delay(200);

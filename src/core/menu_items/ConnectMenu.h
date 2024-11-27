@@ -11,7 +11,7 @@ public:
     String getName(void);
 
 private:
-    String _name = "Connect";
+    String _name = "airdrop";
 
 };
 

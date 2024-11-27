@@ -139,7 +139,7 @@ static duk_ret_t native_wifiScan(duk_context *ctx) {
     // Example usage: `print(wifiScan()[0].SSID)`
     wifiDisconnect();
     WiFi.mode(WIFI_MODE_STA);
-    //Serial.println("Scanning...");
+    //Serial.println("skanowanie...");
     int nets = WiFi.scanNetworks();
     duk_push_array(ctx);
     int arrayIndex = 0;

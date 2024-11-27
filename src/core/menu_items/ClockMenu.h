@@ -11,7 +11,7 @@ public:
     String getName(void);
 
 private:
-    String _name = "Clock";
+    String _name = "zegar";
 };
 
 #endif

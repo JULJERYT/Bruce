@@ -105,11 +105,11 @@ void wifi_atk_menu()
 {
   bool scanAtks = false;
   options = {
-      {"Target Atks", [&]()
+      {"wybierz wifi", [&]()
        { scanAtks = true; }},
-      {"Beacon SPAM", [=]()
+      {"spam wifi", [=]()
        { beaconAttack(); }},
-      {"Deauth Flood", [=]()
+      {"spam deauth", [=]()
        { deauthFloodAttack(); }},
   };
   delay(200);
@@ -119,7 +119,7 @@ void wifi_atk_menu()
   {
     int nets;
     WiFi.mode(WIFI_MODE_STA);
-    displayRedStripe("Scanning..", TFT_WHITE, bruceConfig.priColor);
+    displayRedStripe("skanowanie...", TFT_WHITE, bruceConfig.priColor);
     nets = WiFi.scanNetworks();
     ap_records.clear();
     options = {};
@@ -137,7 +137,7 @@ void wifi_atk_menu()
                          }});
     }
 
-    options.push_back({"Main Menu", [=]()
+    options.push_back({"wroc do menu", [=]()
                        { backToMenu(); }});
 
     delay(200);
@@ -163,7 +163,7 @@ void deauthFloodAttack()
   int nets;
   WiFi.mode(WIFI_AP);
 ScanNets:
-  displayRedStripe("Scanning..", TFT_WHITE, bruceConfig.priColor);
+  displayRedStripe("skanowanie...", TFT_WHITE, bruceConfig.priColor);
   nets = WiFi.scanNetworks();
   ap_records.clear();
   for (int i = 0; i < nets; i++)
@@ -224,15 +224,15 @@ ScanNets:
 void target_atk_menu(String tssid, String mac, uint8_t channel)
 {
   options = {
-      {"Information", [=]()
+      {"informacje", [=]()
        { wifi_atk_info(tssid, mac, channel); }},
-      {"Deauth", [=]()
+      {"wyjeb", [=]()
        { target_atk(tssid, mac, channel); }},
-      {"Clone Portal", [=]()
+      {"sklonuj", [=]()
        { EvilPortal(tssid, channel, false); }},
-      {"Deauth+Clone", [=]()
+      {"wyjeb i sklonuj", [=]()
        { EvilPortal(tssid, channel, true); }},
-      {"Main Menu", [=]()
+      {"wroc do menu", [=]()
        { backToMenu(); }},
   };
 
@@ -279,10 +279,10 @@ void target_atk(String tssid, String mac, uint8_t channel)
       // desenhar a tela
       drawMainBorder();
       tft.setTextColor(TFT_RED,bruceConfig.bgColor);
-      tft.drawCentreString("Target Deauth", tft.width() / 2, 28, SMOOTH_FONT);
+      tft.drawCentreString("wypierdalanie wifi", tft.width() / 2, 28, SMOOTH_FONT);
       tft.setTextColor(bruceConfig.priColor,bruceConfig.bgColor);
-      tft.drawString("AP: " + tssid, 15, 48);
-      tft.drawString("Channel: " + String(channel), 15, 66);
+      tft.drawString("nazwa: " + tssid, 15, 48);
+      tft.drawString("kanal: " + String(channel), 15, 66);
       tft.drawString(mac, 15, 84);
       delay(50);
       redraw = false;
@@ -294,7 +294,7 @@ void target_atk(String tssid, String mac, uint8_t channel)
     if (millis() - tmp > 2000)
     {
       tft.setCursor(15, HEIGHT - 23);
-      tft.print("Frames: " + String(count / 2) + "/s");
+      tft.print("pakiety wpierdolone w ruter: " + String(count / 2) + "/s");
       count = 0;
       tmp = millis();
     }

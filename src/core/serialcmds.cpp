@@ -845,7 +845,7 @@ bool processSerialCommand(String cmd_str) {
     Wire.begin(GROVE_SDA, GROVE_SCL);
     byte error, address;
     int nDevices;
-    Serial.println("Scanning...");
+    Serial.println("skanowanie...");
     nDevices = 0;
     for(address = 1; address < 127; address++ )
     {

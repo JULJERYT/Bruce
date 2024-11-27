@@ -12,7 +12,7 @@ void RFMenu::optionsMenu() {
         {"Jammer Itmt",     [=]() { rf_jammerIntermittent(); }}, //@IncursioHack
         {"Jammer Full",     [=]() { rf_jammerFull(); }}, //@IncursioHack
         {"Config",          [=]() { configMenu(); }},
-        {"Main Menu",       [=]() { backToMenu(); }},
+        {"wroc do menu",       [=]() { backToMenu(); }},
     };
 
     delay(200);

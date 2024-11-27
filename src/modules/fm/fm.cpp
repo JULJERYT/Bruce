@@ -35,7 +35,7 @@ uint16_t fm_scan() {
   min_noise = radio.currNoiseLevel;
 
   tft.fillScreen(bruceConfig.bgColor);
-  displayRedStripe("Scanning...", TFT_WHITE, bruceConfig.priColor);
+  displayRedStripe("skanowanie...", TFT_WHITE, bruceConfig.priColor);
   for (f=8750; f<10800; f+=10) {
     Serial.print("Measuring "); Serial.print(f); Serial.print("...");
     radio.readTuneMeasure(f);
@@ -86,7 +86,7 @@ void fm_options_frq(uint16_t f_min, bool reserved) {
     sprintf(f_str, "%d Hz", f);
     options.push_back({f_str,      [=]() { set_frq(f); }});
   }
-  options.push_back({"Main Menu",  [=]() { backToMenu(); }});
+  options.push_back({"wroc do menu",  [=]() { backToMenu(); }});
   delay(200);
   loopOptions(options);
 }
@@ -124,7 +124,7 @@ void fm_options_digit(uint16_t f_min, bool reserved) {
     sprintf(f_str, "%d MHz", f);
     options.push_back({f_str,      [=]() { fm_options_frq(f, reserved); }});
   }
-  options.push_back({"Main Menu",  [=]() { backToMenu(); }});
+  options.push_back({"wroc do menu",  [=]() { backToMenu(); }});
   delay(200);
   loopOptions(options);
 }
@@ -144,7 +144,7 @@ void fm_options(uint16_t f_min, uint16_t f_max, bool reserved) {
     sprintf(f_str, "%d MHz", f);
     options.push_back({f_str,      [=]() { fm_options_digit(f, reserved); }});
   }
-  options.push_back({"Main Menu",  [=]() { backToMenu(); }});
+  options.push_back({"wroc do menu",  [=]() { backToMenu(); }});
   delay(200);
   loopOptions(options);
 

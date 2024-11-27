@@ -577,10 +577,10 @@ String loopSD(FS &fs, bool filePicker, String allowed_ext) {
         // Definição da matriz "Options"
         if(fileList[index].folder==true && fileList[index].operation==false) {
           options = {
-            {"New Folder", [=]() { createFolder(fs, Folder); }},
-            {"Rename",     [=]() { renameFile(fs, Folder + fileList[index].filename, fileList[index].filename); }}, // Folder=="/"? "":"/" +  Attention to Folder + filename, Need +"/"+ beetween them?
-            {"Delete",     [=]() { deleteFromSd(fs, Folder + fileList[index].filename); }},                         // Folder=="/"? "":"/" +  Attention to Folder + filename, Need +"/"+ beetween them?
-            {"Main Menu",  [&]() { exit = true; }},
+            {"nowy folder", [=]() { createFolder(fs, Folder); }},
+            {"zmien nazwe",     [=]() { renameFile(fs, Folder + fileList[index].filename, fileList[index].filename); }}, // Folder=="/"? "":"/" +  Attention to Folder + filename, Need +"/"+ beetween them?
+            {"usun",     [=]() { deleteFromSd(fs, Folder + fileList[index].filename); }},                         // Folder=="/"? "":"/" +  Attention to Folder + filename, Need +"/"+ beetween them?
+            {"wroc do menu",  [&]() { exit = true; }},
           };
           delay(200);
           loopOptions(options);
@@ -591,10 +591,10 @@ String loopSD(FS &fs, bool filePicker, String allowed_ext) {
           goto Files;
         } else {
           options = {
-            {"New Folder", [=]() { createFolder(fs, Folder); }},
+            {"nowy folder", [=]() { createFolder(fs, Folder); }},
           };
-          if(fileToCopy!="") options.push_back({"Paste", [=]() { pasteFile(fs, Folder); }});
-          options.push_back({"Main Menu", [&]() { exit = true; }});
+          if(fileToCopy!="") options.push_back({"wklej", [=]() { pasteFile(fs, Folder); }});
+          options.push_back({"wroc do menu", [&]() { exit = true; }});
           delay(200);
           loopOptions(options);
           tft.drawRoundRect(5,5,WIDTH-10,HEIGHT-10,5,bruceConfig.priColor);
@@ -617,24 +617,24 @@ String loopSD(FS &fs, bool filePicker, String allowed_ext) {
           fileList.clear(); // Clear memory to allow other functions to work better
 
           options = {
-            {"View File",  [=]() { viewFile(fs, filepath); }},
-            {"File Info",  [=]() { fileInfo(fs, filepath); }},
-            {"Rename",     [=]() { renameFile(fs, filepath, filename); }},
-            {"Copy",       [=]() { copyFile(fs, filepath); }},
-            {"Delete",     [=]() { deleteFromSd(fs, filepath); }},
-            {"New Folder", [=]() { createFolder(fs, Folder); }},
+            {"pokaz plik",  [=]() { viewFile(fs, filepath); }},
+            {"info o pliku",  [=]() { fileInfo(fs, filepath); }},
+            {"zmien nazwe",     [=]() { renameFile(fs, filepath, filename); }},
+            {"kopiuj",       [=]() { copyFile(fs, filepath); }},
+            {"usun",     [=]() { deleteFromSd(fs, filepath); }},
+            {"nowy folder", [=]() { createFolder(fs, Folder); }},
           };
-          if(fileToCopy!="") options.push_back({"Paste",  [=]() { pasteFile(fs, Folder); }});
-          if(&fs == &SD) options.push_back({"Copy->LittleFS", [=]() { copyToFs(SD,LittleFS, filepath); }});
-          if(&fs == &LittleFS && sdcardMounted) options.push_back({"Copy->SD", [=]() { copyToFs(LittleFS, SD, filepath); }});
+          if(fileToCopy!="") options.push_back({"wklej",  [=]() { pasteFile(fs, Folder); }});
+          if(&fs == &SD) options.push_back({"kopiuj->LittleFS", [=]() { copyToFs(SD,LittleFS, filepath); }});
+          if(&fs == &LittleFS && sdcardMounted) options.push_back({"kopiuj->SD", [=]() { copyToFs(LittleFS, SD, filepath); }});
 
           // custom file formats commands added in front
-          if(filepath.endsWith(".jpg")) options.insert(options.begin(), {"View Image",  [&]() {
+          if(filepath.endsWith(".jpg")) options.insert(options.begin(), {"pokaz obraz",  [&]() {
               showJpeg(fs, filepath);
               delay(750);
               while(!checkAnyKeyPress()) yield();
             }});
-          if(filepath.endsWith(".gif")) options.insert(options.begin(), {"View Image",  [&]() {
+          if(filepath.endsWith(".gif")) options.insert(options.begin(), {"pokaz obraz",  [&]() {
               showGIF(fs, filepath);
               delay(750);
               while(!checkAnyKeyPress()) yield();
@@ -726,7 +726,7 @@ String loopSD(FS &fs, bool filePicker, String allowed_ext) {
             }});
           }
 
-          options.push_back({"Main Menu", [&]() { exit = true; }});
+          options.push_back({"wroc do menu", [&]() { exit = true; }});
           delay(200);
           if(!filePicker) loopOptions(options);
           else {

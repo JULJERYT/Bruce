@@ -68,8 +68,8 @@ void key_input(FS fs, String bad_script) {
         if(checkSelPress()) {
           while(checkSelPress()); // hold the code in this position until release the btn
           options = {
-            {"Continue",  [=](){ yield(); }},
-            {"Main Menu", [=](){ returnToMenu=true;}},
+            {"kontrynuuj",  [=](){ yield(); }},
+            {"wroc do menu", [=](){ returnToMenu=true;}},
           };
           delay(250);
           loopOptions(options);
@@ -256,10 +256,10 @@ NewScript:
   options = { };
 
   if(setupSdCard()) {
-    options.push_back({"SD Card", [&]()  { fs=&SD; }});
+    options.push_back({"karta sd", [&]()  { fs=&SD; }});
   }
-  options.push_back({"LittleFS",  [&]()   { fs=&LittleFS; }});
-  options.push_back({"Main Menu", [&]()   { fs=nullptr; }});
+  options.push_back({"littlefs",  [&]()   { fs=&LittleFS; }});
+  options.push_back({"wroc do menu", [&]()   { fs=nullptr; }});
 
   delay(250);
   loopOptions(options);

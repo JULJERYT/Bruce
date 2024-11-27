@@ -17,7 +17,7 @@ void NRF24Menu::optionsMenu() {
   #endif
     options.push_back({"Jammer 2.4G",  [=]() { nrf_jammer(); }});
 
-    options.push_back({"Main Menu",    [=]() { backToMenu(); }});
+    options.push_back({"wroc do menu",    [=]() { backToMenu(); }});
     delay(200);
     loopOptions(options,false,true,"Bluetooth");
 }

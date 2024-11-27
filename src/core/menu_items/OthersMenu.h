@@ -11,7 +11,7 @@ public:
     String getName(void);
 
 private:
-    String _name = "Others";
+    String _name = "inne";
 };
 
 #endif
