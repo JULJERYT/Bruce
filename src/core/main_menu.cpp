@@ -9,7 +9,7 @@ MainMenu::MainMenu() {
         &bleMenu,
         // &rfMenu,
         // &rfidMenu,
-        // &irMenu,
+        &irMenu,
         // &fmMenu,
         // #if defined(USE_NRF24_VIA_SPI)
         //     &nrf24Menu,

@@ -8,7 +8,7 @@
 #include "menu_items/ConfigMenu.h"
 // #include "menu_items/ConnectMenu.h"
 // #include "menu_items/FMMenu.h"
-// #include "menu_items/IRMenu.h"
+#include "menu_items/IRMenu.h"
 // #include "menu_items/NRF24.h"
 #include "menu_items/OthersMenu.h"
 // #include "menu_items/RFIDMenu.h"
@@ -24,7 +24,7 @@ public:
     // ConnectMenu connectMenu;
     ConfigMenu configMenu;
     // FMMenu fmMenu;
-    // IRMenu irMenu;
+    IRMenu irMenu;
     // NRF24Menu nrf24Menu;
     OthersMenu othersMenu;
     // RFIDMenu rfidMenu;
